@@ -1,0 +1,49 @@
+[options]
+font = Hack 10
+mouse_autohide = true
+
+# "system", "on" or "off"
+cursor_blink = system
+
+# "block", "underline" or "ibeam"
+cursor_shape = block
+
+[colors]
+foreground = #c8c8c8
+background  = #121212
+cursor = #93a1a1
+
+# colors from color0 to color254 can be set
+# Black + Grey
+color0 = #1d1f21
+color8 = #8e908c
+
+# Red + Bright Red
+color1 = #c82829
+color9 = #ff3334
+
+# Green + Bright Green
+color2 = #718c00
+color10 = #89aa00
+
+# Yellow (Orange) + Bright Yellow (Yellow)
+color3 = #f5871f
+color11 = #eab700
+
+# Blue + Bright Blue
+color4 = #4271ae
+color12 = #5795e6
+
+# Magenta (Purple) + Bright Magenta
+color5 = #8959a8
+color13 = #b777e0
+
+# Cyan (Aqua) + Bright Cyan
+color6 = #3e999f
+color14 = #66BDC3
+
+# Light Grey (Selection) + White (Current Line)
+color7 = #d6d6d6
+color15 = #efefef
+
+# vim: ft=dosini cms=#%s
