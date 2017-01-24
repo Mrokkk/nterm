@@ -1,6 +1,6 @@
 #pragma once
 
-#include <gtkmm.h>
+#include <gtkmm/widget.h>
 #include <vte/vte.h>
 #include <utility>
 
@@ -19,12 +19,11 @@ public:
     }
 
     terminal() {
-        auto _vte_widget = vte_terminal_new();
-        vte_ = VTE_TERMINAL(_vte_widget);
+        vte_ = VTE_TERMINAL(vte_terminal_new());
     }
 
-    auto widget() {
-        return GTK_WIDGET(vte_);
+    auto &widget() {
+        return *Glib::wrap(&vte_->widget);
     }
 
     auto vte() {

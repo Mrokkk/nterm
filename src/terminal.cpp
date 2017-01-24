@@ -26,6 +26,7 @@ void terminal::load_theme() {
 terminal::terminal(const config &config)
         : config_(config) {
     connect_shell();
+    g_signal_connect(vte(), "key-press-event", G_CALLBACK(key_press_cb), this);
     set_scroll_on_output(true);
     set_scroll_on_keystroke(true);
     set_audible_bell(false);
@@ -69,5 +70,20 @@ int terminal::connect_shell() {
     }
     g_strfreev(env);
     return EXIT_SUCCESS;
+}
+
+bool terminal::key_press_cb(VteTerminal *, GdkEventKey *event, terminal *term) {
+    const auto modifiers = event->state & gtk_accelerator_get_default_mod_mask();
+    if (modifiers == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) {
+        switch (gdk_keyval_to_lower(event->keyval)) {
+            case GDK_KEY_c:
+                term->copy_clipboard();
+                return true;
+            case GDK_KEY_v:
+                term->paste_clipboard();
+                return true;
+        }
+    }
+    return false;
 }
 

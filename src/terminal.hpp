@@ -11,12 +11,12 @@ class terminal final : public vte::terminal {
 
     static char *get_shell();
     void load_theme();
+    int connect_shell();
+    static bool key_press_cb(VteTerminal *, GdkEventKey *event, terminal *term);
 
 public:
 
     terminal(const config &config);
-    int connect_shell();
-    void grab_focus();
 
 };
 

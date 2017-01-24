@@ -1,33 +1,11 @@
 #include "nterm.hpp"
 
-void nterm::connect_signals() {
-    g_signal_connect(terminal_.vte(), "key-press-event", G_CALLBACK(key_press_cb), this);
-    g_signal_connect(terminal_.vte(), "focus-in-event",  G_CALLBACK(terminal_focus_cb), this);
-}
-
-gboolean nterm::key_press_cb(VteTerminal *, GdkEventKey *event, nterm *nterm_instance) {
-    auto &vte = nterm_instance->get_terminal();
-    const auto modifiers = event->state & gtk_accelerator_get_default_mod_mask();
-    if (modifiers == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) {
-        switch (gdk_keyval_to_lower(event->keyval)) {
-            case GDK_KEY_c:
-                vte.copy_clipboard();
-                return true;
-            case GDK_KEY_v:
-                vte.paste_clipboard();
-                return true;
-        }
-    }
-    return false;
-}
-
-gboolean nterm::terminal_focus_cb(VteTerminal *, GdkEventKey *, nterm *) {
-    return false;
-}
-
-bool nterm::focus_cb(GdkEventFocus *) {
-    set_urgency_hint(false);
-    return false;
+nterm::nterm(const config &conf)
+        : global_config_(conf), terminal_(global_config_) {
+    configure_window();
+    add(terminal_.widget());
+    show_all();
+    terminal_.widget().grab_focus();
 }
 
 void nterm::configure_window() {
@@ -35,5 +13,10 @@ void nterm::configure_window() {
     signal_focus_out_event().connect(sigc::mem_fun(*this, &nterm::focus_cb));
     set_decorated(false);
     set_title("nterm");
+}
+
+bool nterm::focus_cb(GdkEventFocus *) {
+    set_urgency_hint(false);
+    return false;
 }
 
