@@ -7,7 +7,7 @@ void exit_success(VteTerminal *) {
     exit(EXIT_SUCCESS);
 }
 
-gboolean focus_cb(GtkWindow *window) {
+bool focus_cb(GtkWindow *window) {
     gtk_window_set_urgency_hint(window, false);
     return false;
 }
@@ -32,7 +32,7 @@ void configure_window(GtkWindow *window) {
 
 void parse_argv(int argc, char **argv) {
     GError *error = nullptr;
-    gboolean version = false;
+    bool version = false;
     auto context = g_option_context_new(nullptr);
     const GOptionEntry entries[] = {
         {"version", 'v', 0, G_OPTION_ARG_NONE, &version, "Version info", nullptr},
@@ -57,9 +57,7 @@ void parse_argv(int argc, char **argv) {
 int main(int argc, char **argv) {
     parse_argv(argc, argv);
     auto window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    std::string config_file{g_get_user_config_dir()};
-    config_file += "/nterm/config";
-    config global_config(config_file);
+    config global_config(std::string{g_get_user_config_dir()} + "/nterm/config");
     configure_window(GTK_WINDOW(window));
     nterm nterm_instance(global_config);
     gtk_container_add(GTK_CONTAINER(window), nterm_instance.get_terminal().widget());
