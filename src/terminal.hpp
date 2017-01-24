@@ -15,11 +15,6 @@ class terminal final : public vte::terminal {
 public:
 
     terminal(const config &config);
-
-    const config &get_config() const {
-        return config_;
-    }
-
     int connect_shell();
     void grab_focus();
 
