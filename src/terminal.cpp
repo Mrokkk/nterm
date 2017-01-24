@@ -1,4 +1,5 @@
 #include "terminal.hpp"
+#include <gtkmm/accelgroup.h>
 
 void terminal::load_theme() {
     set_colors(nullptr, nullptr, config_.colors.palette.data(), config_.colors.palette.size());
@@ -73,8 +74,8 @@ int terminal::connect_shell() {
 }
 
 bool terminal::key_press_cb(VteTerminal *, GdkEventKey *event, terminal *term) {
-    const auto modifiers = event->state & gtk_accelerator_get_default_mod_mask();
-    if (modifiers == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) {
+    const auto modifiers = event->state & Gtk::AccelGroup::get_default_mod_mask();
+    if (modifiers == (Gdk::CONTROL_MASK | Gdk::SHIFT_MASK)) {
         switch (gdk_keyval_to_lower(event->keyval)) {
             case GDK_KEY_c:
                 term->copy_clipboard();
