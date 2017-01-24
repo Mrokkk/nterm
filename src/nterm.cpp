@@ -25,3 +25,15 @@ gboolean nterm::terminal_focus_cb(VteTerminal *, GdkEventKey *, nterm *) {
     return false;
 }
 
+bool nterm::focus_cb(GdkEventFocus *) {
+    set_urgency_hint(false);
+    return false;
+}
+
+void nterm::configure_window() {
+    signal_focus_in_event().connect(sigc::mem_fun(*this, &nterm::focus_cb));
+    signal_focus_out_event().connect(sigc::mem_fun(*this, &nterm::focus_cb));
+    set_decorated(false);
+    set_title("nterm");
+}
+

@@ -30,7 +30,6 @@ terminal::terminal(const config &config)
     set_scroll_on_keystroke(true);
     set_audible_bell(false);
     set_allow_bold(true);
-    search_set_wrap_around(true);
     set_scrollback_lines(0);
     set_mouse_autohide(config.options.mouse_autohide);
     if (!config.options.font.empty()) {
@@ -70,9 +69,5 @@ int terminal::connect_shell() {
     }
     g_strfreev(env);
     return EXIT_SUCCESS;
-}
-
-void terminal::grab_focus() {
-    gtk_widget_grab_focus(widget());
 }
 
