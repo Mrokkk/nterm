@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 
 include(FindPkgConfig)
 
-pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+pkg_check_modules(GTK3 REQUIRED gtkmm-3.0)
 pkg_check_modules(VTE REQUIRED vte-2.91)
 
 set(CMAKE_CXX_FLAGS "-std=c++1z -O3 -Wall -Wextra -pedantic -Werror -DNDEBUG")
