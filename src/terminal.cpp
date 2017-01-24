@@ -25,6 +25,7 @@ void terminal::load_theme() {
 
 terminal::terminal(const config &config)
         : config_(config) {
+    connect_shell();
     set_scroll_on_output(true);
     set_scroll_on_keystroke(true);
     set_audible_bell(false);
@@ -37,10 +38,7 @@ terminal::terminal(const config &config)
         set_font(font);
         pango_font_description_free(font);
     }
-    if (config.options.cursor_blink)
-        set_cursor_blink_mode(VTE_CURSOR_BLINK_ON);
-    else
-        set_cursor_blink_mode(VTE_CURSOR_BLINK_OFF);
+    set_cursor_blink_mode(VTE_CURSOR_BLINK_ON); // FIXME
     if (config.options.cursor_shape == "block") {
         set_cursor_shape(VTE_CURSOR_SHAPE_BLOCK);
     } else if (config.options.cursor_shape == "ibeam") {
@@ -49,7 +47,6 @@ terminal::terminal(const config &config)
         set_cursor_shape(VTE_CURSOR_SHAPE_UNDERLINE);
     }
     load_theme();
-    connect_shell();
 }
 
 char *terminal::get_shell() {

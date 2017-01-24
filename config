@@ -3,7 +3,7 @@ font = Hack 10
 mouse_autohide = true
 
 # "system", "on" or "off"
-cursor_blink = system
+cursor_blink = true
 
 # "block", "underline" or "ibeam"
 cursor_shape = block
