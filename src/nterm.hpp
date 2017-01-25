@@ -9,6 +9,7 @@ class nterm final : public Gtk::Window {
     const config &global_config_;
     terminal terminal_;
 
+    void on_alpha_screen_changed(const Glib::RefPtr<Gdk::Screen>& previous_screen);
     bool focus_cb(GdkEventFocus *);
     void configure_window();
 
