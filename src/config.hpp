@@ -2,19 +2,19 @@
 
 #include <experimental/optional>
 #include <array>
-#include <gtk/gtk.h>
+#include <glibmm/keyfile.h>
+#include <gdkmm/rgba.h>
 
 class config_file final {
 
     std::string filename_;
-    GKeyFile *key_file_;
+    Glib::KeyFile key_file_;
 
 public:
 
     template <typename T> using optional = std::experimental::optional<T>;
 
     config_file(const std::string &filename);
-    ~config_file();
 
     template <typename T>
     optional<T> read(const char *, const char *) {
@@ -27,9 +27,9 @@ struct config final {
 
     struct options final {
         bool mouse_autohide;
-        std::string font;
         bool cursor_blink;
         std::string cursor_shape;
+        std::string font;
     };
 
     struct colors final {

@@ -2,34 +2,27 @@
 
 config_file::config_file(const std::string &filename)
         : filename_(filename) {
-    key_file_ = g_key_file_new();
-    g_key_file_load_from_file(key_file_, filename.c_str(), G_KEY_FILE_NONE, nullptr);
-}
-
-config_file::~config_file() {
-    g_key_file_free(key_file_);
+    key_file_.load_from_file(filename);
 }
 
 template <>
 config_file::optional<bool> config_file::read(const char *section, const char *key) {
-    GError *error = nullptr;
-    bool b = g_key_file_get_boolean(key_file_, section, key, &error);
-    if (error) {
-        g_error_free(error);
+    try {
+        bool b = key_file_.get_boolean(section, key);
+        return b;
+    } catch (Glib::KeyFileError) {
         return {};
     }
-    return b;
 }
 
 template <>
 config_file::optional<std::string> config_file::read(const char *section, const char *key) {
-    GError *error = nullptr;
-    auto b = g_key_file_get_string(key_file_, section, key, &error);
-    if (error) {
-        g_error_free(error);
+    try {
+        auto b = key_file_.get_string(section, key);
+        return b;
+    } catch (Glib::KeyFileError) {
         return {};
     }
-    return b;
 }
 
 template <>
