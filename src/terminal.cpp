@@ -39,7 +39,7 @@ terminal::terminal(const config &config)
         set_font(font);
         pango_font_description_free(font);
     }
-    set_cursor_blink_mode(VTE_CURSOR_BLINK_ON); // FIXME
+    set_cursor_blink_mode(VTE_CURSOR_BLINK_SYSTEM); // FIXME
     if (config.options.cursor_shape == "block") {
         set_cursor_shape(VTE_CURSOR_SHAPE_BLOCK);
     } else if (config.options.cursor_shape == "ibeam") {
