@@ -5,7 +5,7 @@
 
 class terminal final : public vte::terminal {
 
-    constexpr static const char *term = "xterm";
+    constexpr static const char *term_ = "xterm";
     const config &config_;
     int child_pid_;
 

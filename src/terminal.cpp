@@ -62,7 +62,7 @@ int terminal::connect_shell() {
     GError *error = nullptr;
     char *default_argv[] = {get_shell(), nullptr};
     auto env = g_get_environ();
-    env = g_environ_setenv(env, "TERM", term, TRUE);
+    env = g_environ_setenv(env, "TERM", term_, TRUE);
     if (spawn_sync(VTE_PTY_DEFAULT, nullptr, default_argv, env, G_SPAWN_SEARCH_PATH, nullptr, nullptr, &child_pid_, nullptr, &error)) {
         watch_child(child_pid_);
     } else {
