@@ -1,8 +1,7 @@
 [options]
 font = Hack 10
 mouse_autohide = true
-
-# "system", "on" or "off"
+decorate_window = false
 cursor_blink = true
 
 # "block", "underline" or "ibeam"

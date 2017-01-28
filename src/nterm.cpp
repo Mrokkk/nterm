@@ -20,7 +20,7 @@ void nterm::configure_window() {
     signal_screen_changed().connect(sigc::mem_fun(*this, &nterm::on_alpha_screen_changed));
     signal_focus_in_event().connect(sigc::mem_fun(*this, &nterm::focus_cb));
     signal_focus_out_event().connect(sigc::mem_fun(*this, &nterm::focus_cb));
-    set_decorated(false);
+    set_decorated(global_config_.options.decorate_window);
     set_title("nterm");
     on_alpha_screen_changed(Glib::RefPtr<Gdk::Screen>());
 }

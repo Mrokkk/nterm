@@ -42,6 +42,7 @@ config::config(const std::string &filename) {
     options.font = file.read<std::string>("options", "font").value_or(std::string{"Monospace 10"});
     options.cursor_blink = file.read<bool>("options", "cursor_blink").value_or(true);
     options.cursor_shape = file.read<std::string>("options", "cursor_shape").value_or("block");
+    options.decorate_window = file.read<bool>("options", "decorate_window").value_or(true);
     colors.foreground = file.read<GdkRGBA>("colors", "foreground");
     colors.foreground_bold = file.read<GdkRGBA>("colors", "foreground_bold");
     colors.background = file.read<GdkRGBA>("colors", "background");

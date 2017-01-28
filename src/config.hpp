@@ -28,6 +28,7 @@ struct config final {
     struct options final {
         bool mouse_autohide;
         bool cursor_blink;
+        bool decorate_window;
         std::string cursor_shape;
         std::string font;
     };
